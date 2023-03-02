@@ -8,7 +8,8 @@ app.get("/", (req, res) => {
     res.sendFile(path);
 });
 
-const mySecret = process.env['MESSAGE_STYLE']
+const mySecret = "uppercase";
+console.log(mySecret)
 
 let response = "Hello json";
 app.get('/json', (req, res) => {
