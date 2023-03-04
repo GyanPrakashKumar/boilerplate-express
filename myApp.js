@@ -1,5 +1,6 @@
 let express = require('express');
 let app = express();
+require('dotenv').config()
 
 app.use("/public", express.static(__dirname + "/public"));
 
@@ -8,7 +9,7 @@ app.get("/", (req, res) => {
     res.sendFile(path);
 });
 
-const mySecret = "uppercase";
+const mySecret = process.env['MESSAGE_STYLE'];
 console.log(mySecret)
 
 let response = "Hello json";
@@ -22,6 +23,7 @@ app.get('/json', (req, res) => {
         "message": response
     });
     }
+    console.log(message);
 });
 
 
