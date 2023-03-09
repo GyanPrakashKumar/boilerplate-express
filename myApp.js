@@ -1,10 +1,9 @@
 let express = require('express');
 let bodyParser = require("body-parser");
 let app = express();
-
-app.use(bodyParser.urlencoded({extended: false}))
-
+app.use(express.json());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}))
 
 const logger = (req, res, next) => {
   console.log(`${req.method} ${req.path} - ${req.ip}`);
@@ -38,7 +37,7 @@ app.get('/:word/echo', function(req, res){
 res.json({echo: req.params.word})
 console.log(req.params.word)
 })
-
+/*
 app.get("/name", function(req, res) {
   // var firstName = req.query.first;
   // var lastName = req.query.last;
@@ -47,11 +46,12 @@ app.get("/name", function(req, res) {
     name: `${firstName} ${lastName}`
   });
 });
+*/
 
-app.post((req, res) => {
-    let first= req.body.first;
-    let last= req.body.last;
-    res.json({ name: `${first} ${last}`});
+app.post("/name", (req, res) => {
+  const firstname=req.body.first;
+  const lastname=req.body.last;
+  res.json({"name": `${firstname} ${lastname}`});
 });
 
 // Assets at the /public route
