@@ -19,6 +19,16 @@ app.get("/json", logger, (req, res) => {
       message: "Hello json"
     });
 });
+
+app.get('/now', function(req, res, next){
+  req.time = new Date().toString();
+  next();
+},
+  function(req, res) {
+    res.send({"time": req.time});
+  }       
+);
+
 // Assets at the /public route
 app.use('/public', express.static(__dirname + '/public'));
 
