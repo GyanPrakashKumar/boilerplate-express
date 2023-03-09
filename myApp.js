@@ -7,7 +7,7 @@ const logger = (req, res, next) => {
 };
 
 app.get("/", logger, (req, res) => {
-  res.sendFile('/views/index.html');
+  res.sendFile(__dirname + '/views/index.html');
 });
 app.get("/json", logger, (req, res) => {
   if (process.env.MESSAGE_STYLE === "uppercase")
@@ -29,12 +29,10 @@ app.get('/now', function(req, res, next){
   }       
 );
 
-app.get("/:word/echo", (req, res) => {
-  const { word } = req.params;
-  res.json({
-    echo: word
-  });
-});
+app.get('/:word/echo', function(req, res){
+res.json({echo: req.params.word})
+console.log(req.params.word)
+})
 
 // Assets at the /public route
 app.use('/public', express.static(__dirname + '/public'));
