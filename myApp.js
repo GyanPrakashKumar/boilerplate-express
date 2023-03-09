@@ -2,11 +2,10 @@ let express = require('express');
 let app = express();
 
 // Root level logger middleware
-app.use((req, res, next)=>{
-  let string = `${req.method} ${req.path} - ${req.ip}`;
-  console.log(string)
-  next()
-})
+app.use(function (req, res, next) {
+  console.log(req.method + " " + req.path + " - " + req.ip);
+  next();
+});
 
 app.use("/public", express.static(__dirname + "/public"));
 
